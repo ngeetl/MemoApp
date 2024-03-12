@@ -18,15 +18,16 @@
         </div>
         <ul class="border-t py-8 px-7">
             <li v-for="(item, idx) in data" :key="idx">
-                <span class="mr-2 cursor-pointer">🟨</span>
+                <span @click="onDelete(idx)" class="mr-2 cursor-pointer">🟨</span>
                 {{ item }}</li>
         </ul>
     </div>
   </template>
   
   <script>
-import axios from 'axios';
-import { ref } from 'vue';
+    import axios from 'axios';
+    import { ref } from 'vue';
+
   export default {
     setup() {
         const data = ref([]);
@@ -52,9 +53,16 @@ import { ref } from 'vue';
             }
         }
 
+        // 데이터 삭제
+        const onDelete = (idx) => {
+            axios.delete(`/api/memo/${idx}`) 
+                .then((res) => {
+                        data.value = res.data;
+                    })          
+        }
        
 
-        return { data, add, inputValue };
+        return { data, add, inputValue, onDelete };
     }    
   }
   </script>
