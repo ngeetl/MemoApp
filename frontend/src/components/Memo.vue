@@ -68,6 +68,9 @@
   </script>
   
   <style scoped>
+  .memo {
+    min-height: 1vh;
+  }
   .memo ul {
     list-style: none;
   }
